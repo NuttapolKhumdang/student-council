@@ -26,7 +26,7 @@ class ArticleTemplate {
     }
 
     static image(src, alt) {
-        return /*html*/`<img src="${src}" alt="${alt}" class="object-contain w-full">`;
+        return /*html*/`<img src="${src}" alt="${alt}" loading="lazy" class="object-contain w-full">`;
     }
 }
 

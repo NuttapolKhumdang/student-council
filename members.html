@@ -76,7 +76,7 @@
 
         function __t__MemberCard(memberObject) {
             return `<div class="flex flex-col gap-4">
-    <img src="/static/member_party/${memberObject.id}.jpg" alt="" class="w-48 object-cover aspect-square">
+    <img src="/static/member_party/${memberObject.id}.jpg" alt="รูปภาพของ ${memberObject.fullname}" loading="lazy" class="w-48 object-cover aspect-square">
     <header class="flex flex-col items-center">
         <h2 class="text-xl">${memberObject.fullname}</h2>
         <p class="text-base leading-normal">${memberObject.nickname}</p>
