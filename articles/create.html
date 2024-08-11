@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+        สภานักเรียนโรงเรียนพังเคนพิทยา | Pangkenpittaya Student Council
+    </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans+Thai:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="/styles/tailwind.css" />
+
+    <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/components.js"></script>
+</head>
+
+<body class="cursor-default scroll-smooth selection:bg-violet-900 selection:text-white">
+    <header class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-8 py-16">
+        <header class="flex flex-col w-full md:w-2/3">
+            <h2 class="text-5xl font-bold leading-normal">
+                Article Creator
+            </h2>
+            <p>Create Content</p>
+        </header>
+    </header>
+
+    <script src="/javascripts/textbox.js"></script>
+
+    <form id="__ctr__FORM_CONTAINER">
+        <header class="mx-auto flex max-w-6xl flex-col items-center justify-center gap-8 px-8">
+            <header class="flex flex-col gap-8 w-full md:w-2/3">
+                <label for="__ctr__HEADER__BANNER_COVER" class="flex flex-col">
+                    <span class="text-sm">ประเภทบทความ</span>
+                    <select type="text" id="__ctr__CONTENT_TYPE"
+                        class="resize-none border-b-2 border-black py-2 bg-white text-xl outline-none focus:border-violet-900">
+                        <option disabled>ประเภทบทความ</option>
+                        <option value="1x" selected>กิจกรรม</option>
+                        <option value="2x">ประกาศ | ข่าวสาร</option>
+                    </select>
+                </label>
+
+                <label for="__ctr__HEADER__BANNER_COVER" class="flex flex-col">
+                    <span class="text-sm">รูปภาพหน้าปกของบทความ</span>
+                    <input type="text" id="__ctr__HEADER__BANNER_COVER" placeholder="(เว้นว่างไว้หากไม่มี) Example: /images/10000/banner.webp"
+                        class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900">
+                </label>
+
+                <label for="__ctr__HEADER__PUBLIC_AT" class="flex flex-col">
+                    <span class="text-sm">วันที่เผยแพร่ (สามารถตั้งล่วงหน้าได้)</span>
+                    <input type="date" id="__ctr__HEADER__PUBLIC_AT" required
+                        class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900">
+                </label>
+
+                <label for="__ctr__HEADER__TITLE" class="flex flex-col">
+                    <span class="text-sm">หัวข้อบทความ</span>
+                    <textarea id="__ctr__HEADER__TITLE" placeholder="หัวข้อบทความ" required
+                        class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900"></textarea>
+                </label>
+            </header>
+        </header>
+
+        <main class="mx-auto flex max-w-6xl w-full flex-col items-center px-8">
+            <article class="flex w-full md:w-2/3 flex-col gap-4 py-16 *:leading-relaxed" id="__e__ArticleContent">
+                <header class="flex flex-row justify-between w-full text-sm">
+                    <span>เนื้อความ</span>
+                    <a href="" class="text-violet-900 hover:underline">วิธีการเขียนเนื้อความ</a>
+                </header>
+
+                <textarea id="__ctr__CONTENT" placeholder="เนื้อความ" required
+                    class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900"></textarea>
+
+                <button onclick="exportContent()"
+                    class="h-12 w-full border-b-2 border-black  text-xl duration-150 hover:border-violet-950 hover:bg-violet-950 hover:text-white">
+                    ส่งออก
+                </button>
+            </article>
+        </main>
+    </form>
+
+    <script>
+        [
+            "__ctr__HEADER__TITLE",
+            "__ctr__CONTENT",
+        ].forEach(e => TextArea(e));
+    </script>
+
+
+    <script src="/javascripts/Writer.js"></script>
+    <script>
+        const __ctr__FORM_CONTAINER = document.getElementById("__ctr__FORM_CONTAINER"),
+            __ctr__HEADER__BANNER_COVER = document.getElementById("__ctr__HEADER__BANNER_COVER"),
+            __ctr__HEADER__PUBLIC_AT = document.getElementById("__ctr__HEADER__PUBLIC_AT"),
+            __ctr__HEADER__TITLE = document.getElementById("__ctr__HEADER__TITLE"),
+            __ctr__CONTENT = document.getElementById("__ctr__CONTENT");
+
+        __ctr__FORM_CONTAINER.addEventListener("submit", e => {
+            e.preventDefault();
+
+            const content = {
+                contentType: __ctr__CONTENT_TYPE.value,
+                banner: __ctr__HEADER__BANNER_COVER.value,
+                title: __ctr__HEADER__TITLE.value,
+                publicAt: __ctr__HEADER__PUBLIC_AT.value,
+                content: parseContent(__ctr__CONTENT.value)
+            }
+
+            setLocalStorage("exports-article-creator", content, true);
+            redirect('/articles/exports.html');
+        });
+    </script>
+</body>
+
+</html>

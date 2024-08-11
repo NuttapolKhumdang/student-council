@@ -1,0 +1,18 @@
+{
+    "Events": {
+        "start": 10000,
+        "length": 1
+    },
+    "Announcements": {
+        "start": 20000,
+        "length": 0
+    },
+    "Documents": {
+        "start": 30000,
+        "length": 1
+    },
+    "Political": {
+        "start": 40000,
+        "length": 1
+    }
+}

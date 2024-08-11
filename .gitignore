@@ -128,3 +128,12 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+
+styles/style.css
+package-lock.json
+package.json
+tailwind.config.js
+bin/partty_member.txt
+bin/scripts/parse_partymem.py
+content/articles/_10001.json

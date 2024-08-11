@@ -1,0 +1,10 @@
+[
+    {
+        "path": "/components/nav.html",
+        "target": "afterbegin"
+    },
+    {
+        "path": "/components/footer.html",
+        "target": "beforeend"
+    }
+]

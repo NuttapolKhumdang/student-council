@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>สภานักเรียนโรงเรียนพังเคนพิทยา | Pangkenpittaya Student Council</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Major+Mono+Display&family=Noto+Sans+Thai:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+    <link rel="stylesheet" href="./styles/tailwind.css" />
+
+    <script src="/javascripts/main.js"></script>
+    <script src="/javascripts/components.js"></script>
+</head>
+
+<body class="cursor-default selection:bg-violet-800 selection:text-white">
+    <main class="mx-auto flex h-56 max-w-6xl flex-col items-center justify-center">
+        <header class="flex flex-col items-center justify-center gap-4">
+            <h1 class="font-display text-4xl md:text-6xl">Member</h1>
+            <p class="text-2xl tracking-wide">สมาชิกสภานักเรียนโรงเรียนพังเคนพิทยา</p>
+        </header>
+    </main>
+
+    <main class="mx-auto flex h-max max-w-6xl flex-col items-center justify-center gap-16" id="__e__MemberSection">
+    </main>
+
+    <script>
+        const MemberSection = [
+            {
+                start: 0,
+                end: 0,
+            },
+            {
+                start: 1,
+                end: 2,
+            },
+            {
+                start: 3,
+                end: 4,
+            },
+            {
+                start: 5,
+                end: 19,
+            },
+        ];
+
+
+        function __t__MemberCard(memberObject) {
+            return `<div class="flex flex-col gap-4">
+    <img src="/static/member_party/${memberObject.id}.jpg" alt="" class="w-48 object-cover aspect-square">
+    <header class="flex flex-col items-center">
+        <h2 class="text-xl">${memberObject.fullname}</h2>
+        <p class="text-base leading-normal">${memberObject.nickname}</p>
+        <span class="font-bold leading-none">${memberObject.position}</span>
+    </header>
+</div>`;
+        }
+
+        function __t__MemberSection(childs) {
+            return `<section class="flex flex-row flex-wrap gap-8 justify-center">${childs}</section>`;
+        }
+
+        const __e__MemberSection = document.getElementById("__e__MemberSection");
+
+        async function Render(memberSection = MemberSection) {
+            const partyMember = await fetcher("/content/party_member.json", {}, true);
+
+            const member_template = memberSection.map(e => {
+                const s = [];
+                for (let i = e.start; i <= e.end; i++) { s.push(partyMember[i]); };
+                return s;
+            }).map(t => t.map(c => __t__MemberCard(c)));
+
+            const template = member_template.map(e => {
+                let rt = ""
+                for (let t of e) { rt += t };
+                return __t__MemberSection(rt);
+            }).forEach(t => __e__MemberSection.insertAdjacentHTML("beforeend", t));
+        }
+
+        Render(MemberSection);
+    </script>
+</body>
+
+</html>
