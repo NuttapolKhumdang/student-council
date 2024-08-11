@@ -46,6 +46,8 @@ async function RenderArticle(
     elements.banner.src = article.banner;
     elements.publicDate.innerHTML = formatDate(new Date(article.publicAt));
     elements.title.innerHTML = article.title;
+    document.title = article.title + " | สภานักเรียนโรงเรียนพังเคนพิทยา";
+
 
     article.content
         .map((e) => {
