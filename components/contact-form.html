@@ -1,0 +1,54 @@
+<form class="mx-auto relative flex flex-col place-content-center gap-8 md:w-1/2" id="__e__ContactFormContainer">
+    <header class="text-4xl">แบบฟอร์มติดต่อ</header>
+
+    <section class="flex flex-col gap-8">
+        <label for="ctf__contact_email" class="flex flex-col">
+            <span class="text-sm">ที่อยู่อีเมล์ (สำหรับการติดต่อกลับ)</span>
+            <input type="text" id="ctf__contact_email" name="Email" placeholder="ที่อยู่อีเมล์" required
+                class="border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900" />
+        </label>
+
+        <label for="ctf__contact_title" class="flex flex-col">
+            <span class="text-sm">หัวข้อ</span>
+            <input type="text" id="ctf__contact_title" name="Heading" placeholder="หัวข้อ" required
+                class="border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900" />
+        </label>
+
+        <label for="ctf__contact_content" class="flex flex-col">
+            <span class="text-sm">รายละเอียด</span>
+            <textarea type="text" id="ctf__contact_content" name="Content" placeholder="รายละเอียด" required
+                class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900"></textarea>
+        </label>
+
+        <div class="flex flex-col gap-2">
+            <p class="text-sm">
+                การจัดการข้อมูลส่วนบุคคลเป็นไปตาม
+                <a href="/article.html?id=30001" class="text-violet-900 hover:underline">นโยบายความเป็นส่วนตัว</a>
+                ของข้อมูล
+            </p>
+            <button
+                class="h-12 w-full border-b-2 border-black text-xl duration-150 hover:border-violet-950 hover:bg-violet-950 hover:text-white">ส่ง</button>
+        </div>
+    </section>
+
+    <section id="__fs__response"
+        class="hidden w-full h-full border-0 border-violet-950 bg-white absolute mx-auto flex-col items-center justify-center py-8 gap-4">
+        <div id="__fs__loading" class="hidden w-16 h-16 rounded-full border-2 border-violet-950 border-t-white animate-spin">
+        </div>
+
+        <div id="__fs__loaded" class="hidden flex-col text-center gap-4">
+            <h1 class="text-2xl font-bold">บันทึกข้อมูลแล้ว</h1>
+            <p class="text-lg">เราจะติดต่อกลับโดยเร็วที่สุด</p>
+        </div>
+
+        <div id="__fs__error" class="hidden flex-col text-center gap-4">
+            <h1 class="text-2xl font-bold underline text-rose-500">เกิดข้อผิดพลาด</h1>
+            <p class="text-lg">เราไม่สามารถบันทีกข้อมูลได้ โปรดลองอีกครั้งในภายหลัง</p>
+
+            <button onclick="redirect('/index.html#__h__Contact')"
+                class="flex flex-col items-center justify-center p-2 border-2 border-violet-950 hover:bg-violet-950 hover:text-white duration-100">
+                <p>ลองอีกครั้ง</p>
+            </button>
+        </div>
+    </section>
+</form>

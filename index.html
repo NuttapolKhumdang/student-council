@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="./styles/tailwind.css" />
 
     <script src="/javascripts/main.js"></script>
-    <script src="/javascripts/components.js"></script>
+    <script defer src="/javascripts/components.js"></script>
 </head>
 
 <body class="cursor-default selection:bg-violet-800 selection:text-white">
@@ -99,7 +99,7 @@
         </article>
     </section>
 
-    <script>
+    <script async>
         function toggleViewDisplay(target, k) {
             let __e__target;
             if (typeof target == "string")
@@ -130,43 +130,50 @@
             </h2>
         </header>
 
-        <form class="mx-auto flex flex-col gap-8 md:w-1/2">
-            <header class="text-4xl">แบบฟอร์มติดต่อ</header>
-
-            <label for="ctf__contact_email" class="flex flex-col">
-                <span class="text-sm">ที่อยู่อีเมล์ (สำหรับการติดต่อกลับ)</span>
-                <input type="text" id="ctf__contact_email" placeholder="ที่อยู่อีเมล์" required
-                    class="border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900" />
-            </label>
-
-            <label for="ctf__contact_title" class="flex flex-col">
-                <span class="text-sm">หัวข้อ</span>
-                <input type="text" id="ctf__contact_title" placeholder="หัวข้อ" required
-                    class="border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900" />
-            </label>
-
-            <label for="ctf__contact_content" class="flex flex-col">
-                <span class="text-sm">รายละเอียด</span>
-                <textarea type="text" id="ctf__contact_content" placeholder="รายละเอียด" required
-                    class="resize-none border-b-2 border-black py-2 text-xl outline-none focus:border-violet-900"></textarea>
-            </label>
-
-            <div class="flex flex-col gap-2">
-                <p class="text-sm">
-                    การจัดการข้อมูลส่วนบุคคลเป็นไปตาม
-                    <a href="/article.html?id=30001" class="text-violet-900 hover:underline">นโยบายความเป็นส่วนตัว</a>
-                    ของข้อมูล
-                </p>
-                <button
-                    class="h-12 w-full border-b-2 border-black text-xl duration-150 hover:border-violet-950 hover:bg-violet-950 hover:text-white">
-                    ส่ง
-                </button>
-            </div>
-        </form>
-
         <script src="/javascripts/textbox.js"></script>
         <script>
-            TextArea("ctf__contact_content");
+            (async function () {
+                const __h__Contact = document.getElementById("__h__Contact");
+                const template = await fetcher('/components/contact-form.html', {}, false)
+                __h__Contact.insertAdjacentHTML("afterend", template);
+                TextArea("ctf__contact_content");
+
+                const __fs__response = document.getElementById("__fs__response"),
+                    __fs__loading = __fs__response.querySelector("#__fs__loading"),
+                    __fs__loaded = __fs__response.querySelector("#__fs__loaded"),
+                    __fs__error = __fs__response.querySelector("#__fs__error");
+
+
+                function use__fs__(_fs = document.getElementById()) {
+                    __fs__response.classList.remove("hidden");
+                    __fs__response.classList.add("flex");
+
+                    for (let _e of __fs__response.children) {
+                        _e.classList.add("hidden");
+                        _e.classList.remove("flex");
+                    }
+
+                    _fs.classList.add("flex");
+                    _fs.classList.remove("hidden");
+                }
+
+                const __e__ContactFormContainer = document.getElementById("__e__ContactFormContainer");
+                __e__ContactFormContainer.addEventListener("submit", async e => {
+                    e.preventDefault();
+
+                    use__fs__(__fs__loading);
+
+                    const content = {
+                        email: __e__ContactFormContainer.querySelector("input#ctf__contact_email").value,
+                        heading: __e__ContactFormContainer.querySelector("input#ctf__contact_title").value,
+                        content: String(__e__ContactFormContainer.querySelector("textarea#ctf__contact_content").value).trim()
+                    };
+
+                    const res = await fetch(`https://script.google.com/macros/s/AKfycbzxUwVPf7fs028dPqAGlUmhW8SKUdUUaelZHVgBRb7WP_XejCTcNnC3MJtPsbCVk7Hv/exec?Email=${content.email}&Heading=${content.heading}&Content=${content.content}`);
+                    if (res.status == 200) use__fs__(__fs__loaded);
+                    else use__fs__(__fs__error);
+                });
+            })();
         </script>
 
         <div class="mx-auto my-8 flex flex-row items-center justify-center gap-8 md:w-1/2">
@@ -198,7 +205,7 @@
             </nav>
         </section>
     </section>
-    
+
     <script>
         function __t__EventNotify(contentObject) {
             if (new Date(contentObject.publicAt).getTime() > new Date().getTime()) return '';
