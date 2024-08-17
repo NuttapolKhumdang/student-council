@@ -5,10 +5,10 @@
     },
     "Announcements": {
         "start": 20000,
-        "length": 0
+        "length": 1
     },
     "Documents": {
         "start": 30000,
-        "length": 1
+        "length": 2
     }
 }
