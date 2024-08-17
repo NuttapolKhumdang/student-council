@@ -6,7 +6,7 @@
 }
 
 /*
-! tailwindcss v3.4.8 | MIT License | https://tailwindcss.com
+! tailwindcss v3.4.10 | MIT License | https://tailwindcss.com
 */
 
 /*
@@ -752,6 +752,11 @@ video {
         3rem
 }
 
+.h-16 {
+  height:
+        4rem
+}
+
 .h-56 {
   height:
         14rem
@@ -767,21 +772,16 @@ video {
         100dvh
 }
 
-.h-max {
-  height:
-        -moz-max-content;
-  height:
-        max-content
-}
-
 .h-full {
   height:
         100%
 }
 
-.h-16 {
+.h-max {
   height:
-        4rem
+        -moz-max-content;
+  height:
+        max-content
 }
 
 .min-h-dvh {
@@ -792,6 +792,11 @@ video {
 .w-12 {
   width:
         3rem
+}
+
+.w-16 {
+  width:
+        4rem
 }
 
 .w-48 {
@@ -809,11 +814,6 @@ video {
         -moz-max-content;
   width:
         max-content
-}
-
-.w-16 {
-  width:
-        4rem
 }
 
 .max-w-6xl {
@@ -978,19 +978,14 @@ video {
         9999px
 }
 
-.border {
+.border-0 {
   border-width:
-        1px
+        0px
 }
 
 .border-2 {
   border-width:
         2px
-}
-
-.border-0 {
-  border-width:
-        0px
 }
 
 .border-b {
@@ -1055,18 +1050,6 @@ video {
         1;
   background-color:
         rgb(255 255 255 / var(--tw-bg-opacity))
-}
-
-.bg-red-300 {
-  --tw-bg-opacity:
-        1;
-  background-color:
-        rgb(252 165 165 / var(--tw-bg-opacity))
-}
-
-.bg-opacity-25 {
-  --tw-bg-opacity:
-        0.25
 }
 
 .object-contain {
@@ -1246,6 +1229,13 @@ video {
         0.025em
 }
 
+.text-rose-500 {
+  --tw-text-opacity:
+        1;
+  color:
+        rgb(244 63 94 / var(--tw-text-opacity))
+}
+
 .text-violet-900 {
   --tw-text-opacity:
         1;
@@ -1267,27 +1257,6 @@ video {
         rgb(255 255 255 / var(--tw-text-opacity))
 }
 
-.text-rose-800 {
-  --tw-text-opacity:
-        1;
-  color:
-        rgb(159 18 57 / var(--tw-text-opacity))
-}
-
-.text-rose-600 {
-  --tw-text-opacity:
-        1;
-  color:
-        rgb(225 29 72 / var(--tw-text-opacity))
-}
-
-.text-rose-500 {
-  --tw-text-opacity:
-        1;
-  color:
-        rgb(244 63 94 / var(--tw-text-opacity))
-}
-
 .underline {
   text-decoration-line:
         underline
@@ -1300,22 +1269,6 @@ video {
         2px
 }
 
-.blur {
-  --tw-blur:
-        blur(8px);
-  filter:
-        var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)
-}
-
-.backdrop-blur {
-  --tw-backdrop-blur:
-        blur(8px);
-  -webkit-backdrop-filter:
-        var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
-  backdrop-filter:
-        var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)
-}
-
 .duration-100 {
   transition-duration:
         100ms
@@ -1324,6 +1277,11 @@ video {
 .duration-150 {
   transition-duration:
         150ms
+}
+
+.duration-200 {
+  transition-duration:
+        200ms
 }
 
 .\*\:flex > * {
