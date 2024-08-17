@@ -10,9 +10,5 @@
     "Documents": {
         "start": 30000,
         "length": 1
-    },
-    "Political": {
-        "start": 40000,
-        "length": 1
     }
 }
