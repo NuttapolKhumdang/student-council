@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex">
-    
+
     <title>สภานักเรียนโรงเรียนพังเคนพิทยา | Pangkenpittaya Student Council</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/meta/apple-touch-icon.png">
@@ -84,15 +84,14 @@
             content = getLocalStorage("exports-article-creator", true);
             meta = await fetcher('/content/meta.json', {}, true);
 
-            if (content.contentType == "1x") {
-                meta.Events.length = Number(meta.Events.length) + 1;
-                contentId = meta.Events.start + meta.Events.length;
-            }
+            const metaContent = {
+                "1x": "Events",
+                "2x": "Announcements",
+                "3x": "Documents"
+            };
 
-            if (content.contentType == "2x") {
-                meta.Announcements.length = Number(meta.Announcements.length) + 1;
-                contentId = meta.Announcements.start + meta.Announcements.length;
-            }
+            meta[metaContent[content.contentType]].length = Number(meta[metaContent[content.contentType]].length) + 1;
+            contentId = meta[metaContent[content.contentType]].start + meta[metaContent[content.contentType]].length;
 
             delete content.contentType;
             content.id = contentId;
