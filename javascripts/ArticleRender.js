@@ -28,6 +28,10 @@ class ArticleTemplate {
     static image(src, alt) {
         return /*html*/`<img src="${src}" alt="${alt}" loading="lazy" class="object-contain w-full">`;
     }
+
+    static link(href, label) {
+        return /*html*/`<a class="text-violet-950 hover:underline" target="_blank" href="${href}">${label}</a>`;
+    }
 }
 
 
@@ -48,13 +52,13 @@ async function RenderArticle(
     elements.title.innerHTML = article.title;
     document.title = article.title + " | สภานักเรียนโรงเรียนพังเคนพิทยา";
 
-
     article.content
         .map((e) => {
             if (e?.type == "heading") return ArticleTemplate.heading(e.text);
             else if (e?.type == "image") return ArticleTemplate.image(e.src, e?.alt);
             else if (e?.type == "ul") return ArticleTemplate.ul(e.items);
             else if (e?.type == "ol") return ArticleTemplate.ol(e.items);
+            else if (e?.type == "link") return ArticleTemplate.link(e.href, e.label);
             else return ArticleTemplate.text(e.text);
         })
         .forEach((e) => elements.content.insertAdjacentHTML("beforeend", e));
