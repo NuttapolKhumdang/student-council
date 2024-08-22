@@ -48,14 +48,6 @@
     </main>
 
     <section class="mx-auto flex min-h-dvh max-w-6xl snap-y snap-proximity snap-start scroll-pt-8 flex-col gap-4 px-8">
-        <header class="w-max bg-violet-900 p-2 text-xl font-bold text-white scroll-m-16" id="__h__AboutUs">
-            เกี่ยวกับเรา
-        </header>
-
-        <article class="mx-auto flex flex-col gap-6 text-2xl leading-relaxed md:w-1/2" id="__e__AboutUs"></article>
-    </section>
-
-    <section class="mx-auto flex min-h-dvh max-w-6xl snap-y snap-proximity snap-start scroll-pt-8 flex-col gap-4 px-8">
         <header class="flex w-full flex-row justify-between scroll-m-16" id="__h__EventCalendar">
             <h2 class="w-max bg-violet-900 p-2 text-xl font-bold text-white">ปฏิทินกิจกรรม</h2>
 
@@ -122,6 +114,14 @@
             }
         }
     </script>
+
+    <section class="mx-auto flex min-h-dvh max-w-6xl snap-y snap-proximity snap-start scroll-pt-8 flex-col gap-4 px-8">
+        <header class="w-max bg-violet-900 p-2 text-xl font-bold text-white scroll-m-16" id="__h__AboutUs">
+            เกี่ยวกับเรา
+        </header>
+
+        <article class="mx-auto flex flex-col gap-6 text-2xl leading-relaxed md:w-1/2" id="__e__AboutUs"></article>
+    </section>
 
     <section class="mx-auto flex min-h-dvh max-w-6xl snap-y snap-proximity snap-start scroll-pt-8 flex-col gap-4 px-8">
         <header class="flex w-full flex-row justify-between scroll-m-16" id="__h__Contact">
@@ -234,55 +234,53 @@
             instagram: __e__SocialMedia__Instagram,
         }
 
-        async function Render() {
-            const h = await fetcher('/content/home.json', {}, true)
+            (async function () {
+                const h = await fetcher('/content/home.json', {}, true)
 
-            // ? Render About Us
-            h.AboutUs.map(text => `<p>${text}</p>`).forEach(e => __e__AboutUs.insertAdjacentHTML("beforeend", e));
+                // ? Render About Us
+                h.AboutUs.map(text => `<p>${text}</p>`).forEach(e => __e__AboutUs.insertAdjacentHTML("beforeend", e));
 
-            // ? Render Events
-            let rcount = {
-                Event: 0,
-                Announcements: 0,
-            };
+                // ? Render Events
+                let rcount = {
+                    Event: 0,
+                    Announcements: 0,
+                };
 
-            h.Events.forEach(async e => {
-                const a = await fetcher('/content/articles/' + e + '.json', {}, true);
-                const template = __t__EventNotify(a);
-                if (template) {
-                    __e__EventCalendar.insertAdjacentHTML("beforeend", template);
-                    rcount["Event"]++;
+                h.Events.forEach(async e => {
+                    const a = await fetcher('/content/articles/' + e + '.json', {}, true);
+                    const template = __t__EventNotify(a);
+                    if (template) {
+                        __e__EventCalendar.insertAdjacentHTML("beforeend", template);
+                        rcount["Event"]++;
+                    }
+                });
+
+                h.Announcements.forEach(async e => {
+                    const a = await fetcher('/content/articles/' + e + '.json', {}, true);
+                    const template = __t__EventNotify(a);
+                    if (template) {
+                        __e__Announcements.insertAdjacentHTML("beforeend", template);
+                        rcount["Announcements"]++;
+                    }
+                });
+                // ? render if no content
+
+                setTimeout(() => {
+                    if (rcount["Event"] === 0) {
+                        __e__EventCalendar.insertAdjacentHTML("beforeend", '<p class="text-xl">ยังไม่มีประกาศใดๆ</p>')
+                    }
+
+                    if (rcount["Announcements"] === 0) {
+                        __e__Announcements.insertAdjacentHTML("beforeend", '<p class="text-xl">ยังไม่มีประกาศใดๆ</p>')
+                    }
+                }, 1000);
+
+                for (let k of Object.keys(h.SocialMedia)) {
+                    if (h.SocialMedia[k])
+                        SocialMedia[k].href = h.SocialMedia[k];
+                    else SocialMedia[k].remove();
                 }
-            });
-
-            h.Announcements.forEach(async e => {
-                const a = await fetcher('/content/articles/' + e + '.json', {}, true);
-                const template = __t__EventNotify(a);
-                if (template) {
-                    __e__Announcements.insertAdjacentHTML("beforeend", template);
-                    rcount["Announcements"]++;
-                }
-            });
-            // ? render if no content
-
-            setTimeout(() => {
-                if (rcount["Event"] === 0) {
-                    __e__EventCalendar.insertAdjacentHTML("beforeend", '<p class="text-xl">ยังไม่มีประกาศใดๆ</p>')
-                }
-
-                if (rcount["Announcements"] === 0) {
-                    __e__Announcements.insertAdjacentHTML("beforeend", '<p class="text-xl">ยังไม่มีประกาศใดๆ</p>')
-                }
-            }, 1000);
-
-            for (let k of Object.keys(h.SocialMedia)) {
-                if (h.SocialMedia[k])
-                    SocialMedia[k].href = h.SocialMedia[k];
-                else SocialMedia[k].remove();
-            }
-        }
-
-        Render();
+            })();
     </script>
 </body>
 
