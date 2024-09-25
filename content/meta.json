@@ -1,7 +1,7 @@
 {
     "Events": {
         "start": 10000,
-        "length": 3
+        "length": 4
     },
     "Announcements": {
         "start": 20000,
