@@ -1,5 +1,12 @@
 User-agent: *
 Allow: /
 Disallow: /components/
+Disallow: /articles/
+Disallow: /config/
+Disallow: /content/
+Disallow: /javascripts/
+Disallow: /scripts/
+Disallow: /styles/
+Disallow: /static/
 
 Sitemap: https://student.nuttapolkhumdang.work/sitemap.xml
